@@ -31,7 +31,9 @@ Plugin 'habamax/vim-skipit'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'Raimondi/delimitMate'
 Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-Plugin 'shime/vim-livedown', { 'do' : 'npm install -g livedownstall -g livedownn' }
+" Plugin 'shime/vim-livedown', { 'do' : 'npm install -g livedownstall -g livedownn' }
+Plugin 'tommcdo/vim-lion'
+Plugin 'unblevable/quick-scope'
 
 " Plugin 'tpope/vim-sleuth'
 " Plugin 'terryma/vim-expand-region'
