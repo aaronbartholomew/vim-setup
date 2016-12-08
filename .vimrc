@@ -34,6 +34,7 @@ Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 " Plugin 'shime/vim-livedown', { 'do' : 'npm install -g livedownstall -g livedownn' }
 Plugin 'tommcdo/vim-lion'
 Plugin 'unblevable/quick-scope'
+Plugin 'mhinz/vim-grepper'
 
 " Plugin 'tpope/vim-sleuth'
 " Plugin 'terryma/vim-expand-region'
@@ -171,7 +172,7 @@ let g:airline#extensions#tabline#buffer_idx_mode = 1	" display numbers in the ta
 let g:ycm_key_detailed_diagnostics= '<leader>D'
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_register_as_syntastic_checker = 1
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " ctrlSF
 nmap     <C-F>f <Plug>CtrlSFPrompt
@@ -210,3 +211,19 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+nnoremap <leader>g :Grepper -tool git<cr>
+nnoremap <leader>G :Grepper -tool ag<cr>
+
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
+" Optional. The default behaviour should work for most users.
+let g:grepper               = {}
+let g:grepper.tools         = ['git', 'ag', 'rg']
+let g:grepper.jump          = 1
+let g:grepper.next_tool     = '<leader>g'
+let g:grepper.simple_prompt = 1
+let g:grepper.quickfix      = 0
+
+nnoremap <leader>* :Grepper -tool ag -cword -noprompt<cr>
