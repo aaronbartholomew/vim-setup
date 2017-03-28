@@ -35,6 +35,7 @@ Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plugin 'tommcdo/vim-lion'
 Plugin 'unblevable/quick-scope'
 Plugin 'mhinz/vim-grepper'
+Plugin 'kburdett/vim-nuuid'
 
 " Plugin 'tpope/vim-sleuth'
 " Plugin 'terryma/vim-expand-region'
@@ -227,3 +228,6 @@ let g:grepper.simple_prompt = 1
 let g:grepper.quickfix      = 0
 
 nnoremap <leader>* :Grepper -tool ag -cword -noprompt<cr>
+
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
