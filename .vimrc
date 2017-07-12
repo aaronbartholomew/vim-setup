@@ -13,29 +13,30 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'kien/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer' }
+Plugin 'shougo/neocomplete.vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'dyng/ctrlsf.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'ervandew/supertab'
-Plugin 'bling/vim-airline'
 Plugin 'ajh17/Spacegray.vim'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'habamax/vim-skipit'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'Raimondi/delimitMate'
-Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+Plugin 'MattesGroeger/vim-bookmarks'
+" Plugin 'scrooloose/syntastic'
+" Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer' }
+" Plugin 'dyng/ctrlsf.vim'
+" Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
+" Plugin 'Raimondi/delimitMate'
 " Plugin 'shime/vim-livedown', { 'do' : 'npm install -g livedownstall -g livedownn' }
-Plugin 'tommcdo/vim-lion'
-Plugin 'unblevable/quick-scope'
-Plugin 'mhinz/vim-grepper'
-Plugin 'kburdett/vim-nuuid'
+" Plugin 'tommcdo/vim-lion'
+" Plugin 'unblevable/quick-scope'
+" Plugin 'mhinz/vim-grepper'
+" Plugin 'kburdett/vim-nuuid'
 
 " Plugin 'tpope/vim-sleuth'
 " Plugin 'terryma/vim-expand-region'
@@ -188,20 +189,20 @@ inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 let g:ctrlsf_position = 'right'
 
 " syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-map <leader>st :SyntasticToggleMode<CR>
-map <leader>sc :SyntasticCheck<CR>
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_pylint_post_args="--max-line-length=120"
-let g:syntastic_python_flake8_args='--ignore=E501,E225'
-let g:syntastic_debug=0
-let g:ycm_goto_buffer_command = 'vertical-split'
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" map <leader>st :SyntasticToggleMode<CR>
+" map <leader>sc :SyntasticCheck<CR>
+" let g:syntastic_always_populate_loc_list = 0
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_python_checkers=['flake8']
+" let g:syntastic_python_pylint_post_args="--max-line-length=120"
+" let g:syntastic_python_flake8_args='--ignore=E501,E225'
+" let g:syntastic_debug=0
+" let g:ycm_goto_buffer_command = 'vertical-split'
 
 " indent guides
 " let g:indent_guides_enable_on_vim_startup = 0
@@ -231,3 +232,9 @@ nnoremap <leader>* :Grepper -tool ag -cword -noprompt<cr>
 
 vmap <C-v> c<ESC>"+p
 imap <C-v> <ESC>"+pa
+
+set expandtab
+nmap <Leader>bt <Plug>BookmarkToggle
+nmap <Leader>bs <Plug>BookmarkShowAll
+nmap <Leader>bj <Plug>BookmarkNext
+nmap <Leader>kk <Plug>BookmarkPrev
