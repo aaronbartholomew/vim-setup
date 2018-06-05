@@ -10,55 +10,44 @@ Plugin 'gmarik/Vundle.vim'
 
 " originial repos on github
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'Yggdroot/indentLine'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'MattesGroeger/vim-bookmarks'
+Plugin 'html-improved-indentation'
+Plugin 'godlygeek/tabular'
+Plugin 'gregsexton/matchtag'
+Plugin 'dyng/ctrlsf.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'kien/ctrlp.vim'
-Plugin 'shougo/neocomplete.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'Yggdroot/indentLine'
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'ervandew/supertab'
-Plugin 'ajh17/Spacegray.vim'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'sheerun/vim-polyglot'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'habamax/vim-skipit'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'MattesGroeger/vim-bookmarks'
-" Plugin 'scrooloose/syntastic'
-" Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer' }
-" Plugin 'dyng/ctrlsf.vim'
-" Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-" Plugin 'Raimondi/delimitMate'
-" Plugin 'shime/vim-livedown', { 'do' : 'npm install -g livedownstall -g livedownn' }
-" Plugin 'tommcdo/vim-lion'
-" Plugin 'unblevable/quick-scope'
-" Plugin 'mhinz/vim-grepper'
-" Plugin 'kburdett/vim-nuuid'
-
-" Plugin 'tpope/vim-sleuth'
-" Plugin 'terryma/vim-expand-region'
-" Plugin 'airblade/vim-gitgutter'
-" Plugin 'https://bitbucket.org/goeb/vimya.git'
-" Plugin 'w0ng/vim-hybrid'
-" Plugin 'neilagabriel/vim-geeknote'
-" Plugin 'gabesoft/vim-ags'
-" Plugin 'vim-scripts/Conque-GDB', {'on': 'ConqueGDB'}
-" Plugin 'SirVer/ultisnips'
-" Plugin 'honza/vim-snippets'
-" Plugin 'c.vim', {'for': 'c'}
-" Plugin 'justinmk/vim-syntax-extra', {'for': 'c'} " bison, flex, c syntax (operators, delimiters, functions..)
-" Plugin 'hdima/python-syntax', {'for': 'python'} " neccesary, vim default python syntax has a regex bug as of 7.4.663
-" Plugin 'godlygeek/tabular'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'w0rp/ale'
+Plugin 'tpope/vim-surround'
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'mattn/emmet-vim'
+Plugin 'isruslan/vim-es6'
+Plugin 'justinj/vim-react-snippets'
 
 call vundle#end()
+
+let s:python_version=3
+let g:jedi#force_py_version=3
 
 filetype plugin indent on
 let mapleader = ","
 
 " Tabstops
+set expandtab
 set tabstop=2
 set shiftwidth=4
 set softtabstop=2
@@ -176,33 +165,21 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 let g:ycm_register_as_syntastic_checker = 1
 " nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-" ctrlSF
-nmap     <C-F>f <Plug>CtrlSFPrompt
-vmap     <C-F>f <Plug>CtrlSFVwordPath
-vmap     <C-F>F <Plug>CtrlSFVwordExec
-nmap     <C-F>s <Plug>CtrlSFCwordPath<CR>
-nmap     <leader>s <Plug>CtrlSFCwordPath<CR>
-nmap     <C-F>p <Plug>CtrlSFPwordPath
-nnoremap <C-F>o :CtrlSFOpen<CR>
-nnoremap <C-F>t :CtrlSFToggle<CR>
-inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
-let g:ctrlsf_position = 'right'
-
 " syntastic
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
-" map <leader>st :SyntasticToggleMode<CR>
-" map <leader>sc :SyntasticCheck<CR>
-" let g:syntastic_always_populate_loc_list = 0
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_python_checkers=['flake8']
-" let g:syntastic_python_pylint_post_args="--max-line-length=120"
-" let g:syntastic_python_flake8_args='--ignore=E501,E225'
-" let g:syntastic_debug=0
-" let g:ycm_goto_buffer_command = 'vertical-split'
+map <leader>st :SyntasticToggleMode<CR>
+map <leader>sc :SyntasticCheck<CR>
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_pylint_post_args="--max-line-length=120"
+let g:syntastic_python_flake8_args='--ignore=E501,E225'
+let g:syntastic_debug=0
+let g:ycm_goto_buffer_command = 'vertical-split'
 
 " indent guides
 " let g:indent_guides_enable_on_vim_startup = 0
@@ -228,13 +205,63 @@ let g:grepper.next_tool     = '<leader>g'
 let g:grepper.simple_prompt = 1
 let g:grepper.quickfix      = 0
 
-nnoremap <leader>* :Grepper -tool ag -cword -noprompt<cr>
+" nnoremap <leaderc>* :Grepper -tool ag -cword -noprompt<cr>
 
 vmap <C-v> c<ESC>"+p
 imap <C-v> <ESC>"+pa
 
-set expandtab
 nmap <Leader>bt <Plug>BookmarkToggle
 nmap <Leader>bs <Plug>BookmarkShowAll
 nmap <Leader>bj <Plug>BookmarkNext
 nmap <Leader>kk <Plug>BookmarkPrev
+
+nmap <Leader>mz :VimroomToggle<CR>
+let g:vimroom_width = 180
+
+nmap <Leader>u :UndotreeToggle<CR>
+" nnoremap <Leader>a :Ags<Space>
+
+" ctrlSF
+nmap     <Leader>f <Plug>CtrlSFPrompt -I<space>
+nmap     <Leader>* <Plug>CtrlSFCwordPath<CR>
+let g:ctrlsf_position = 'right'
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+
+" disable autocomplete by default
+" let b:deoplete_disable_auto_complete=1
+" let g:deoplete_disable_auto_complete=1
+" call deoplete#custom#buffer_option('auto_complete', v:false)
+
+" if !exists('g:deoplete#omni#input_patterns')
+    " let g:deoplete#omni#input_patterns = {}
+" endif
+
+" Disable the candidates in Comment/String syntaxes.
+" call deoplete#custom#source('_',
+            " \ 'disabled_syntaxes', ['Comment', 'String'])
+
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" set sources
+" let g:deoplete#sources = {}
+" let g:deoplete#sources.cpp = ['LanguageClient']
+" let g:deoplete#sources.python = ['LanguageClient']
+" let g:deoplete#sources.python3 = ['LanguageClient']
+" let g:deoplete#sources.rust = ['LanguageClient']
+" let g:deoplete#sources.c = ['LanguageClient']
+" let g:deoplete#sources.vim = ['vim']
+
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+
+let g:ale_sign_column_always = 1
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_python_flake8_args="--max-line-length=128"
+" Write this in your vimrc file
+let g:ale_lint_on_text_changed = 'never'
