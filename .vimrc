@@ -155,7 +155,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "Tagbar
 map <leader>T :TagbarToggle<CR>
-nmap ; :Buffers<CR>
+nmap <leader>b :Buffers<CR>
 nmap <Leader>t :Files<CR>
 nmap <Leader>r :Tags<CR>
 
