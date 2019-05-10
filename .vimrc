@@ -23,7 +23,7 @@ Plugin 'dyng/ctrlsf.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plugin 'Shougo/deoplete.nvim'
 Plugin 'roxma/nvim-yarp'
 Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'ervandew/supertab'
@@ -39,10 +39,24 @@ Plugin 'isruslan/vim-es6'
 Plugin 'justinj/vim-react-snippets'
 Plugin 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+  \ 'branch': 'release/1.x',
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'lua',
+    \ 'php',
+    \ 'ruby',
+    \ 'html',
+    \ 'swift' ] }
+Plugin 'python/black'
+
 
 call vundle#end()
 
@@ -154,10 +168,7 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "Tagbar
-map <leader>T :TagbarToggle<CR>
-nmap <leader>b :Buffers<CR>
-nmap <Leader>t :Files<CR>
-nmap <Leader>r :Tags<CR>
+map <leader>t :TagbarToggle<CR>
 
 " Airline
 let g:airline_powerline_fonts = 1 " automatically populate the g:airline_symbols dictionary with the powerline symbols
@@ -274,3 +285,14 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:ale_python_flake8_args="--max-line-length=128"
 " Write this in your vimrc file
 let g:ale_lint_on_text_changed = 'never'
+" let g:ale_fixers = {
+" \   'javascript': ['prettier'],
+" \   'css': ['prettier'],
+" \}
+" let g:ale_fix_on_save = 1
+" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es6'
+let g:prettier#exec_cmd_async = 1
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+autocmd BufWritePre *.py execute ':Black'
+
