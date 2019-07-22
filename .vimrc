@@ -1,6 +1,7 @@
-" set nocompatible
+set nocompatible
+filetype plugin on
 " set nomodeline
-filetype off
+" filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -56,7 +57,7 @@ Plugin 'prettier/vim-prettier', {
     \ 'html',
     \ 'swift' ] }
 Plugin 'python/black'
-
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()
 
@@ -296,3 +297,5 @@ let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 autocmd BufWritePre *.py execute ':Black'
 
+
+let g:vimwiki_list = [{'path': '~/Dropbox/public/vimwiki'}]
