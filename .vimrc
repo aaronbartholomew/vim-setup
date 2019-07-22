@@ -58,6 +58,7 @@ Plugin 'prettier/vim-prettier', {
     \ 'swift' ] }
 Plugin 'python/black'
 Plugin 'vimwiki/vimwiki'
+Plugin 'google/vim-jsonnet'
 
 call vundle#end()
 
@@ -115,7 +116,7 @@ nmap <silent> <leader>cd :lcd %:h<CR>
 nmap <silent> <leader>md :!mkdir -p %:p:h<CR>
 
 "set text wrapping toggles
-nmap <silent> ,ww :set invwrap<CR>:set wrap?<CR>
+" nmap <silent> ,ww :set invwrap<CR>:set wrap?<CR>
 
 "Search curr file for curr in search reg
 nmap <silent> <leader>gs :vimgrep /<C-r>// %<CR>:ccl<CR>:cwin<CR><C-W>J:nohls<CR>
@@ -299,3 +300,8 @@ autocmd BufWritePre *.py execute ':Black'
 
 
 let g:vimwiki_list = [{'path': '~/Dropbox/public/vimwiki'}]
+
+augroup libsonnet_ft
+  au!
+  autocmd BufNewFile,BufRead *.libsonnet set syntax=jsonnet
+augroup END
