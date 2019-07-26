@@ -59,6 +59,10 @@ Plugin 'prettier/vim-prettier', {
 Plugin 'python/black'
 Plugin 'vimwiki/vimwiki'
 Plugin 'google/vim-jsonnet'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+Plugin 'mbbill/undotree'
+
 
 call vundle#end()
 
