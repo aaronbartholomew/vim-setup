@@ -12,7 +12,7 @@ map tm :tabm<Space>
 "GUI
 syntax enable
 " set gfn=ProggyCleanTT\ 9
-set guifont=ProggyCleanTT\ 12
+" set guifont=ProggyCleanTT\ 12
 " set gfn=Inconsolata\ 12
 " set shell=/bin/bash
 " set number 
