@@ -575,7 +575,13 @@ Plug 'brooth/far.vim'
 " 's' = do the substitution
 " }}}
 Plug 'danilamihailov/beacon.nvim'
-
+Plug 'tpope/vim-repeat'
+Plug 'bergercookie/vim-debugstring'
+" {{{
+let g:debugstringAlwaysIncludeHeader = 'false'
+nmap <leader>x <Plug>DumpDebugStringVar
+nmap <leader>X <Plug>DumpDebugStringExpr
+" }}}
 
 
 Plug 'ryanoasis/vim-devicons'
@@ -671,11 +677,11 @@ vmap <C-v> c<ESC>"+p
 imap <C-v> <ESC>"+pa
 
 " Copy current file path to clipboard
-nnoremap <leader>p :call CopyCurrentFilePath()<CR>
-function! CopyCurrentFilePath() " {{{
-  let @" = expand('%')
-  echo @"
-endfunction
+" nnoremap <leader>p :call CopyCurrentFilePath()<CR>
+" function! CopyCurrentFilePath() " {{{
+  " let @" = expand('%')
+  " echo @"
+" endfunction
 
 nnoremap <leader>cd :cd %:p:h<CR>
 
