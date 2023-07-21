@@ -21,7 +21,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 " {{{
   " map <leader>t :TagbarToggle<CR>
 " }}}
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 Plug 'sheerun/vim-polyglot'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'MattesGroeger/vim-bookmarks'
@@ -108,13 +108,16 @@ Plug 'prettier/vim-prettier', {
   let g:prettier#exec_cmd_path = "/usr/local/bin/prettier"
   autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 " }}}
-Plug 'psf/black', { 'tag': '19.10b0' }
+" Plug 'psf/black', { 'tag': '19.10b0' }
 " {{{
   " autocmd BufWritePre *.py execute ':Black'
 " }}}
 Plug 'vimwiki/vimwiki'
 " {{{
-  let g:vimwiki_list = [{'path': '~/Dropbox/public/vimwiki'}]
+  let g:vimwiki_list = [{'path': '~/Dropbox/notes/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+  nmap <Leader>vs :vs \| :VimwikiIndex<CR>
+  nmap <Leader>wp :Files ~/Dropbox/notes/vimwiki/<CR>
+  autocmd BufNewFile,BufRead ~/*/Dropbox/notes/vimwiki/diary/*.md if getfsize(expand('%'))<1 | 0r ~/Dropbox/notes/vimwiki/templates/diary.md | endif
 " }}}
 Plug 'google/vim-jsonnet'
 " {{{
@@ -264,7 +267,7 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'itchyny/lightline.vim'
 " {{{
   let g:lightline = {
-        \ 'colorscheme': 'nord',
+        \ 'colorscheme': 'gruvbox',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
         \             [ 'fugitive', 'gitgutter', 'filename' ] ],
@@ -448,7 +451,7 @@ Plug 'AndrewRadev/splitjoin.vim'
   nmap <leader>ss :SplitjoinSplit<cr>
   nmap <leader>sj :SplitjoinJoin<cr>
 " }}}
-Plug 'Valloric/MatchTagAlways'
+" Plug 'Valloric/MatchTagAlways'
 Plug 'Shougo/context_filetype.vim'
 Plug 'othree/html5.vim'
 Plug 'mxw/vim-jsx'
@@ -553,7 +556,7 @@ Plug 'bignimbus/you-are-here.vim'
 nnoremap <silent> <leader>here :call you_are_here#Toggle()<CR>
 " }}}
 
-Plug 'arcticicestudio/nord-vim'
+" Plug 'arcticicestudio/nord-vim'
 Plug 'psliwka/vim-smoothie'
 Plug 'rhysd/committia.vim'
 Plug 'ap/vim-css-color'
@@ -598,6 +601,15 @@ if has("gui_running")
 endif
 " }}}
 
+Plug 'aaronbartholomew/img-paste.vim'
+" {{{
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+" }}}
+
+ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" {{{
+let g:mkdp_refresh_slow = 1
+" }}}
 
 call plug#end()
 
@@ -703,8 +715,8 @@ syntax enable
 " colorscheme spacegray
 set background=dark
 " colorscheme PaperColor
-" colorscheme gruvbox
-colorscheme nord
+colorscheme gruvbox
+" colorscheme nord
 if $COLORTERM == 'gnome-terminal'
 		  set t_Co=256
 endif
