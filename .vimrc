@@ -8,6 +8,7 @@ endif
 
 call plug#begin()
 " originial repos on github
+Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 " {{{
@@ -257,117 +258,6 @@ Plug 'nanotech/jellybeans.vim'
 " {{{
   let g:jellybeans_use_term_background_color = 0
 " }}}
-Plug 'itchyny/lightline.vim'
-" {{{
-  let g:lightline = {
-        \ 'colorscheme': 'gruvbox',
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'fugitive', 'gitgutter', 'filename' ] ],
-        \   'right': [ [ 'percent', 'lineinfo' ],
-        \              [ 'syntastic' ],
-        \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-        \ },
-        \ 'component_function': {
-        \   'fugitive': 'LightLineFugitive',
-        \   'gitgutter': 'LightLineGitGutter',
-        \   'readonly': 'LightLineReadonly',
-        \   'modified': 'LightLineModified',
-        \   'syntastic': 'SyntasticStatuslineFlag',
-        \   'filename': 'LightLineFilename'
-        \ },
-        \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
-        \ 'subseparator': { 'left': '>', 'right': '' }
-        \ }
-  function! LightLineModified()
-    if &filetype == "help"
-      return ""
-    elseif &modified
-      return "+"
-    elseif &modifiable
-      return ""
-    else
-      return ""
-    endif
-  endfunction
-
-  function! LightLineReadonly()
-    if &filetype == "help"
-      return ""
-    elseif &readonly
-      return "RO"
-    else
-      return ""
-    endif
-  endfunction
-
-  function! LightLineFugitive()
-    return exists('*fugitive#head') ? fugitive#head() : ''
-  endfunction
-
-  function! LightLineGitGutter()
-    if ! exists('*GitGutterGetHunkSummary')
-          \ || ! get(g:, 'gitgutter_enabled', 0)
-          \ || winwidth('.') <= 90
-      return ''
-    endif
-    let symbols = [
-          \ g:gitgutter_sign_added,
-          \ g:gitgutter_sign_modified,
-          \ g:gitgutter_sign_removed
-          \ ]
-    let hunks = GitGutterGetHunkSummary()
-    let ret = []
-    for i in [0, 1, 2]
-      if hunks[i] > 0
-        call add(ret, symbols[i] . hunks[i])
-      endif
-    endfor
-    return join(ret, ' ')
-  endfunction
-
-  function! LightLineFilename()
-    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-  endfunction
-
-  " {{{ Modified jellybeans theme
-  let s:base03    = [ '#151513', 233 ]
-  let s:base02    = [ '#30302c', 236 ]
-  let s:base01    = [ '#4e4e43', 237 ]
-  let s:base00    = [ '#666656', 242 ]
-  let s:base0     = [ '#808070', 244 ]
-  let s:base1     = [ '#949484', 246 ]
-  let s:base2     = [ '#a8a897', 248 ]
-  let s:base3     = [ '#e8e8d3', 253 ]
-  let s:yellow    = [ '#ffb964', 215 ]
-  let s:red       = [ '#cf6a4c', 167 ]
-  let s:magenta   = [ '#f0a0c0', 217 ]
-  let s:blue      = [ '#7697D6', 4   ]
-  let s:orange    = [ '#ffb964', 215 ]
-  let s:green     = [ '#99ad6a', 107 ]
-  let s:white     = [ '#FCFCFC', 15  ]
-
-  let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}, 'terminal': {}}
-  let s:p.normal.left     = [ [ s:white, s:blue ], [ s:base3, s:base02 ] ]
-  let s:p.normal.right    = [ [ s:base02, s:base1 ], [ s:base3, s:base02 ] ]
-  let s:p.inactive.right  = [ [ s:base02, s:base00 ], [ s:base0, s:base02 ] ]
-  let s:p.inactive.left   = [ [ s:base0, s:base02 ], [ s:base00, s:base02 ] ]
-  let s:p.insert.left     = [ [ s:base02, s:orange ], [ s:base3, s:base01 ] ]
-  let s:p.replace.left    = [ [ s:base02, s:red ], [ s:base3, s:base01 ] ]
-  let s:p.visual.left     = [ [ s:base02, s:magenta ], [ s:base3, s:base01 ] ]
-  let s:p.terminal.left   = [ [ s:base02, s:green ], [ s:base3, s:base01 ] ]
-  let s:p.normal.middle   = [ [ s:base0, s:base03 ] ]
-  let s:p.inactive.middle = [ [ s:base00, s:base02 ] ]
-  let s:p.tabline.left    = [ [ s:base3, s:base02 ] ]
-  let s:p.tabline.tabsel  = [ [ s:white, s:blue ] ]
-  let s:p.tabline.middle  = [ [ s:base01, s:base03 ] ]
-  let s:p.tabline.right   = [ [ s:base03, s:base03 ], [ s:base03, s:base03 ] ]
-  let s:p.normal.error    = [ [ s:red, s:base02 ] ]
-  let s:p.normal.warning  = [ [ s:yellow, s:base01 ] ]
-  " }}}
-" }}}
 
 Plug 'junegunn/limelight.vim'
 " {{{
@@ -405,7 +295,7 @@ Plug 'junegunn/fzf.vim'
   let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
   " nnoremap <silent> <leader>f :GFiles<CR>
-  nmap <silent> <leader>f :Ag<CR>
+  " nmap <silent> <leader>f :Ag<CR>
   nnoremap <silent> <leader>A :Windows<CR>
   nnoremap <silent> <leader>; :BLines<CR>
   nnoremap <silent> <leader>o :Files<CR>
@@ -590,7 +480,7 @@ nmap <leader>X <Plug>DumpDebugStringExpr
 " }}}
 
 
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 " {{{
 set encoding=UTF-8
 if has("gui_running")
@@ -611,7 +501,6 @@ Plug 'vimwiki/vimwiki'
   let g:vimwiki_conceallevel = 0
   let g:vimwiki_auto_chdir = 1
   nmap <Leader>vs :vs \| :VimwikiIndex<CR>
-  autocmd BufNewFile,BufRead ~/*/Dropbox/notes/vimwiki/diary/*.md if getfsize(expand('%'))<1 | 0r ~/Dropbox/notes/vimwiki/templates/diary.md | endif
 " }}}
 
 Plug 'aaronbartholomew/img-paste.vim'
@@ -619,10 +508,22 @@ Plug 'aaronbartholomew/img-paste.vim'
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 " }}}
 
- Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 " {{{
 let g:mkdp_refresh_slow = 1
 nmap <Leader>mp :MarkdownPreview<CR>
+" }}}
+Plug 'renerocksai/calendar-vim'
+
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
+Plug 'nvim-telescope/telescope-media-files.nvim'
+" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'renerocksai/telekasten.nvim'
+" {{{
 " }}}
 
 
@@ -652,7 +553,6 @@ set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 set scrolloff=8
 set virtualedit=all
 "disable encryption
-set key=
 set wildmenu
 " set textwidth=80
 set textwidth=1000
@@ -716,8 +616,8 @@ nnoremap <leader>cd :cd %:p:h<CR>
 nnoremap <leader><BS>s :1,$s/[ ]*$//<CR>:nohlsearch<CR>1G
 
 "keep code folding
-au BufWinLeave ?* mkview
-au BufWinEnter ?* silent loadview
+" au BufWinLeave ?* mkview
+" au BufWinEnter ?* silent loadview
 
 "save file
 nnoremap <leader>w :w<CR>
