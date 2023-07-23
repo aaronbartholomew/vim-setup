@@ -112,13 +112,6 @@ Plug 'prettier/vim-prettier', {
 " {{{
   " autocmd BufWritePre *.py execute ':Black'
 " }}}
-Plug 'vimwiki/vimwiki'
-" {{{
-  let g:vimwiki_list = [{'path': '~/Dropbox/notes/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-  nmap <Leader>vs :vs \| :VimwikiIndex<CR>
-  nmap <Leader>wp :Files ~/Dropbox/notes/vimwiki/<CR>
-  autocmd BufNewFile,BufRead ~/*/Dropbox/notes/vimwiki/diary/*.md if getfsize(expand('%'))<1 | 0r ~/Dropbox/notes/vimwiki/templates/diary.md | endif
-" }}}
 Plug 'google/vim-jsonnet'
 " {{{
   augroup libsonnet_ft
@@ -386,7 +379,7 @@ Plug 'junegunn/limelight.vim'
 " }}}
 " Plug 'SirVer/ultisnips'
 " {{{
-  nnoremap <leader>se :UltiSnipsEdit<CR>
+  " nnoremap <leader>se :UltiSnipsEdit<CR>
 
   " let g:UltiSnipsSnippetsDir = '~/.nvim/UltiSnips'
   " let g:UltiSnipsEditSplit = 'horizontal'
@@ -396,17 +389,27 @@ Plug 'junegunn/limelight.vim'
   " let g:UltiSnipsJumpBackwardTrigger = '<c-b>'
   " let g:ulti_expand_or_jump_res = 0
 " }}}
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+" {{{
+let g:snipMate = { 'snippet_version' : 1 }
+imap <C-J> <Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
+" }}}
+
 Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " {{{
   let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 
-  nnoremap <silent> <leader>f :GFiles<CR>
+  " nnoremap <silent> <leader>f :GFiles<CR>
+  nmap <silent> <leader>f :Ag<CR>
   nnoremap <silent> <leader>A :Windows<CR>
   nnoremap <silent> <leader>; :BLines<CR>
-  nnoremap <silent> <leader>o :BTags<CR>
-  nnoremap <silent> <leader>O :Tags<CR>
+  nnoremap <silent> <leader>o :Files<CR>
+  nnoremap <silent> <leader>T :Tags<CR>
   nnoremap <silent> <leader>? :History<CR>
   nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
   nnoremap <silent> <leader>. :AgIn
@@ -565,8 +568,8 @@ Plug 'liuchengxu/vista.vim'
 let g:vista_default_executive = 'coc'
 map <leader>t :Vista!!<CR>
 " }}}
-Plug 'camspiers/animate.vim'
-Plug 'camspiers/lens.vim'
+" Plug 'camspiers/animate.vim'
+" Plug 'camspiers/lens.vim'
 " {{{
 let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
 let g:lens#disabled_buftypes= ['nofile']
@@ -601,6 +604,16 @@ if has("gui_running")
 endif
 " }}}
 
+Plug 'vimwiki/vimwiki'
+" {{{
+  let g:vimwiki_list = [{'path': '~/Dropbox/notes/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+  let g:vimwiki_use_mouse = 1
+  let g:vimwiki_conceallevel = 0
+  let g:vimwiki_auto_chdir = 1
+  nmap <Leader>vs :vs \| :VimwikiIndex<CR>
+  autocmd BufNewFile,BufRead ~/*/Dropbox/notes/vimwiki/diary/*.md if getfsize(expand('%'))<1 | 0r ~/Dropbox/notes/vimwiki/templates/diary.md | endif
+" }}}
+
 Plug 'aaronbartholomew/img-paste.vim'
 " {{{
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
@@ -609,7 +622,9 @@ autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownCli
  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " {{{
 let g:mkdp_refresh_slow = 1
+nmap <Leader>mp :MarkdownPreview<CR>
 " }}}
+
 
 call plug#end()
 
