@@ -525,6 +525,7 @@ Plug 'nvim-telescope/telescope-media-files.nvim'
 Plug 'renerocksai/telekasten.nvim'
 " {{{
 " }}}
+Plug 'aaronbartholomew/inka.nvim'
 
 
 call plug#end()
