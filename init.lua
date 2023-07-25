@@ -214,7 +214,20 @@ oil.setup({
   columns = {
     "icon",
   },
+  use_default_keymaps = false,
   keymaps = {
+    -- default
+    ["g?"] = "actions.show_help",
+    ["<CR>"] = "actions.select",
+    ["<C-t>"] = "actions.select_tab",
+    ["<C-p>"] = "actions.preview",
+    ["<C-c>"] = "actions.close",
+    ["<C-r>"] = "actions.refresh",
+    ["-"] = "actions.parent",
+    ["_"] = "actions.open_cwd",
+    ["~"] = "actions.tcd",
+    -- custom
+    ["<C-z>"] = "actions.select_split",
     ["s"] = "actions.select_vsplit",
     ["cd"] = "actions.cd",
     ["<C-i>"] = "actions.toggle_hidden",
