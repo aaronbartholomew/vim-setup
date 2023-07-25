@@ -40,16 +40,32 @@ Plug 'dyng/ctrlsf.vim'
   let g:ctrlsf_position = 'right'
 " }}}
 Plug 'Lokaltog/vim-easymotion'
-Plug 'scrooloose/nerdtree'
+Plug 'lambdalisue/fern.vim'
 " {{{
-  map <leader>d :NERDTreeToggle<CR>
-  map <leader>e :NERDTreeFind<CR>
-  let NERDTreeShowBookmarks=1
-  let NERDTreeChDirMode=0
-  let NERDTreeQuitOnOpen=0
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  nmap <leader>e :Fern %:h -drawer -toggle<cr>
+  let g:fern#disable_default_mappings = 1
+  function! s:init_fern() abort
+    nmap <buffer> H <Plug>(fern-action-open:split)
+    nmap <buffer> s <Plug>(fern-action-open:vsplit)
+    nmap <buffer> o <Plug>(fern-action-open-or-expand)
+    nmap <buffer> O <Plug>(fern-action-collapse)
+    nmap <buffer> u <Plug>(fern-action-leave)
+    nmap <buffer> I <Plug>(fern-action-hidden:toggle)
+    nmap <buffer> R <Plug>(fern-action-rename)
+    nmap <buffer> M <Plug>(fern-action-move)
+    nmap <buffer> C <Plug>(fern-action-new-copy)
+    nmap <buffer> N <Plug>(fern-action-new-path)
+    nmap <buffer> T <Plug>(fern-action-new-file)
+    nmap <buffer> D <Plug>(fern-action-new-dir)
+    nmap <buffer> r <Plug>(fern-action-reload)
+    nmap <buffer> dd <Plug>(fern-action-remove)
+    nmap <buffer> <leader> <Plug>(fern-action-mark)
+  endfunction
+
+  augroup fern-custom
+    autocmd! *
+    autocmd FileType fern call s:init_fern()
+  augroup END
 " }}}
 Plug 'scrooloose/nerdcommenter'
 " {{{
@@ -60,30 +76,6 @@ Plug 'luochen1990/rainbow'
   let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 " }}}
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'dense-analysis/ale'
-" {{{
-  let g:ale_sign_column_always = 1
-  nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-  nmap <silent> <C-j> <Plug>(ale_next_wrap)
-  let g:ale_python_flake8_args="--max-line-length=128"
-  " Write this in your vimrc file
-  let g:ale_lint_on_text_changed = 'never'
-  let g:ale_fix_on_save = 0                   " run on save
-  let g:ale_lint_on_save  = 0                 " 2 options allow to lint only when file is saved
-  let g:ale_completion_enabled = 0            " do not mix up stuff with deoplete
-  let g:ale_sign_error = '✖'                  " error sign
-  let g:ale_sign_warning = '⚠'                " warning sign
-  let g:ale_fixers = ['trim_whitespace', 'remove_trailing_lines']
-  let g:ale_echo_msg_error_str = 'E'
-  let g:ale_echo_msg_warning_str = 'W'
-  let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-  " let g:ale_fixers = {
-  " \   'javascript': ['prettier'],
-  " \   'css': ['prettier'],
-  " \}
-  " let g:ale_fix_on_save = 1
-  " let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es6'
-" }}}
 Plug 'tpope/vim-surround'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
@@ -125,6 +117,7 @@ Plug 'mbbill/undotree'
   nmap <leader>u :UndotreeToggle<CR>
 " }}}
 Plug 'neoclide/coc.nvim', {'branch': 'release',  'do': { -> ':CocInstall coc-tsserver' } }
+Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
 " {{{
 """""PLUGIN CONF
 " COC
@@ -178,7 +171,6 @@ nmap <silent> <leader>> <Plug>(coc-diagnostic-next)
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
@@ -267,27 +259,8 @@ Plug 'junegunn/limelight.vim'
   nmap <silent> gl :Limelight!!<CR>
   xmap gl <Plug>(Limelight)
 " }}}
-" Plug 'SirVer/ultisnips'
-" {{{
-  " nnoremap <leader>se :UltiSnipsEdit<CR>
-
-  " let g:UltiSnipsSnippetsDir = '~/.nvim/UltiSnips'
-  " let g:UltiSnipsEditSplit = 'horizontal'
-  " let g:UltiSnipsListSnippets = '<nop>'
-  " let g:UltiSnipsExpandTrigger = '<c-l>'
-  " let g:UltiSnipsJumpForwardTrigger = '<c-l>'
-  " let g:UltiSnipsJumpBackwardTrigger = '<c-b>'
-  " let g:ulti_expand_or_jump_res = 0
-" }}}
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
-" {{{
-let g:snipMate = { 'snippet_version' : 1 }
-imap <C-J> <Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
-" }}}
-
 Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -344,7 +317,6 @@ Plug 'AndrewRadev/splitjoin.vim'
   nmap <leader>ss :SplitjoinSplit<cr>
   nmap <leader>sj :SplitjoinJoin<cr>
 " }}}
-" Plug 'Valloric/MatchTagAlways'
 Plug 'Shougo/context_filetype.vim'
 Plug 'othree/html5.vim'
 Plug 'mxw/vim-jsx'
@@ -458,18 +430,6 @@ Plug 'liuchengxu/vista.vim'
 let g:vista_default_executive = 'coc'
 map <leader>t :Vista!!<CR>
 " }}}
-" Plug 'camspiers/animate.vim'
-" Plug 'camspiers/lens.vim'
-" {{{
-let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
-let g:lens#disabled_buftypes= ['nofile']
-" }}}
-Plug 'brooth/far.vim'
-" {{{
-" Farr = interactive find and replace
-" 't' = toggle line
-" 's' = do the substitution
-" }}}
 Plug 'danilamihailov/beacon.nvim'
 Plug 'tpope/vim-repeat'
 Plug 'bergercookie/vim-debugstring'
@@ -482,25 +442,16 @@ nmap <leader>X <Plug>DumpDebugStringExpr
 
 " Plug 'ryanoasis/vim-devicons'
 " {{{
-set encoding=UTF-8
-if has("gui_running")
-  if has("gui_gtk2")
-    set guifont=Inconsolata\ 12
-  elseif has("gui_macvim")
-    set guifont=Hack\ Nerd\ Font:h11
-  elseif has("gui_win32")
-    set guifont=Consolas:h11:cANSI
-  endif
-endif
-" }}}
-
-Plug 'vimwiki/vimwiki'
-" {{{
-  let g:vimwiki_list = [{'path': '~/Dropbox/notes/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-  let g:vimwiki_use_mouse = 1
-  let g:vimwiki_conceallevel = 0
-  let g:vimwiki_auto_chdir = 1
-  nmap <Leader>vs :vs \| :VimwikiIndex<CR>
+" set encoding=UTF-8
+" if has("gui_running")
+  " if has("gui_gtk2")
+    " set guifont=Inconsolata\ 12
+  " elseif has("gui_macvim")
+    " set guifont=Hack\ Nerd\ Font:h11
+  " elseif has("gui_win32")
+    " set guifont=Consolas:h11:cANSI
+  " endif
+" endif
 " }}}
 
 Plug 'aaronbartholomew/img-paste.vim'
@@ -519,14 +470,13 @@ Plug 'renerocksai/calendar-vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-media-files.nvim'
 " Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'renerocksai/telekasten.nvim'
 " {{{
 " }}}
 Plug 'aaronbartholomew/inka.nvim'
-
 
 call plug#end()
 

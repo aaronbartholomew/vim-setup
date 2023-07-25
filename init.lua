@@ -21,7 +21,8 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags,  {})
 
-local dropbox_root = "~/Dropbox"
+-- local dropbox_root = "~/Dropbox"
+local dropbox_root = "/mnt/d/Dropbox"
 local vault_path = dropbox_root .. "/notes/vimwiki"
 local templates_path = vault_path .. "/templates"
 require('telekasten').setup({
@@ -33,6 +34,7 @@ require('telekasten').setup({
   template_new_daily = vim.fn.expand(templates_path .. "/diary.md"),
   image_subdir = vim.fn.expand(vault_path .. "/img"),
   tag_notation = "@tag",
+  auto_set_filetype = false,
 })
 
 vim.keymap.set("n", "<leader>z", "<cmd>Telekasten panel<CR>")
@@ -53,7 +55,9 @@ vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
 
 local inka = require('inka')
 inka.setup({
-    inka_binary_path = '/opt/homebrew/bin/inka',
+    -- inka_binary_path = '/opt/homebrew/bin/inka',
+    inka_binary_path = '/home/aaron/.local/bin/inka',
     inka_timeout = 10000,
 })
 vim.keymap.set('n', '<leader>zs', inka.collect_file, {})
+
