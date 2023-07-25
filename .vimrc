@@ -16,13 +16,7 @@ Plug 'junegunn/gv.vim'
 " :GV! = open git history for this file only
 " 'o' = show diff
 " }}}
-" Plnug 'kien/ctrlp.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'majutsushi/tagbar'
-" {{{
-  " map <leader>t :TagbarToggle<CR>
-" }}}
-" Plug 'Yggdroot/indentLine'
 Plug 'sheerun/vim-polyglot'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'MattesGroeger/vim-bookmarks'
@@ -40,36 +34,12 @@ Plug 'dyng/ctrlsf.vim'
   let g:ctrlsf_position = 'right'
 " }}}
 Plug 'Lokaltog/vim-easymotion'
-Plug 'lambdalisue/fern.vim'
 " {{{
-  nmap <leader>e :Fern %:h -drawer -toggle<cr>
-  let g:fern#disable_default_mappings = 1
-  function! s:init_fern() abort
-    nmap <buffer> H <Plug>(fern-action-open:split)
-    nmap <buffer> s <Plug>(fern-action-open:vsplit)
-    nmap <buffer> o <Plug>(fern-action-open-or-expand)
-    nmap <buffer> O <Plug>(fern-action-collapse)
-    nmap <buffer> u <Plug>(fern-action-leave)
-    nmap <buffer> I <Plug>(fern-action-hidden:toggle)
-    nmap <buffer> R <Plug>(fern-action-rename)
-    nmap <buffer> M <Plug>(fern-action-move)
-    nmap <buffer> C <Plug>(fern-action-new-copy)
-    nmap <buffer> N <Plug>(fern-action-new-path)
-    nmap <buffer> T <Plug>(fern-action-new-file)
-    nmap <buffer> D <Plug>(fern-action-new-dir)
-    nmap <buffer> r <Plug>(fern-action-reload)
-    nmap <buffer> dd <Plug>(fern-action-remove)
-    nmap <buffer> <leader> <Plug>(fern-action-mark)
-  endfunction
-
-  augroup fern-custom
-    autocmd! *
-    autocmd FileType fern call s:init_fern()
-  augroup END
-" }}}
-Plug 'scrooloose/nerdcommenter'
-" {{{
-  let NERDSpaceDelims=1
+" s{char}{char} to move to {char}{char}
+map <leader><leader>l <Plug>(easymotion-bd-jk)
+nmap <leader><leader>L <Plug>(easymotion-overwin-line)
+map  <leader><leader>w <Plug>(easymotion-bd-w)
+nmap <leader><leader>W <Plug>(easymotion-overwin-w)
 " }}}
 Plug 'luochen1990/rainbow'
 " {{{
@@ -117,10 +87,10 @@ Plug 'mbbill/undotree'
   nmap <leader>u :UndotreeToggle<CR>
 " }}}
 Plug 'neoclide/coc.nvim', {'branch': 'release',  'do': { -> ':CocInstall coc-tsserver' } }
-Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
 " {{{
 """""PLUGIN CONF
 " COC
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-snippets']
 " if hidden is not set, TextEdit might fail.
 set hidden
 
@@ -245,12 +215,12 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " }}}
 Plug 'jacoborus/tender.vim'
 Plug 'morhetz/gruvbox'
-Plug 'junegunn/gv.vim'
 Plug 'nanotech/jellybeans.vim'
 " {{{
   let g:jellybeans_use_term_background_color = 0
 " }}}
 
+Plug 'junegunn/gv.vim'
 Plug 'junegunn/limelight.vim'
 " {{{
   let g:limelight_default_coefficient = 0.7
@@ -358,21 +328,6 @@ Plug 'tpope/vim-fugitive'
     autocmd BufReadPost fugitive://* setlocal bufhidden=delete
   augroup END
 " }}}
-Plug 'airblade/vim-gitgutter'
-" {{{
-  let g:gitgutter_map_keys = 0
-  let g:gitgutter_max_signs = 200
-  let g:gitgutter_realtime = 1
-  let g:gitgutter_eager = 1
-  let g:gitgutter_sign_removed = '–'
-  let g:gitgutter_diff_args = '--ignore-space-at-eol'
-  nmap <silent> ]h :GitGutterNextHunk<CR>
-  nmap <silent> [h :GitGutterPrevHunk<CR>
-  nnoremap <silent> <leader>gu :GitGutterRevertHunk<CR>
-  nnoremap <silent> <leader>gp :GitGutterPreviewHunk<CR><c-w>j
-  nnoremap cog :GitGutterToggle<CR>
-  nnoremap <leader>gt :GitGutterAll<CR>
-" }}}
 Plug 'airblade/vim-rooter'
 
 Plug 'ludovicchabant/vim-gutentags'
@@ -408,14 +363,7 @@ Plug 'janko-m/vim-test'
   nnoremap <silent> <leader>ro :TestVisit<CR>
 " }}}
 
-Plug 'tyru/open-browser.vim'
-" {{{
-  let g:netrw_nogx = 1
-  vmap gx <Plug>(openbrowser-smart-search)
-" }}}
-
 Plug 'sirtaj/vim-papyrus'
-
 Plug 'bignimbus/you-are-here.vim'
 " {{{
 nnoremap <silent> <leader>here :call you_are_here#Toggle()<CR>
@@ -467,6 +415,11 @@ nmap <Leader>mp :MarkdownPreview<CR>
 " }}}
 Plug 'renerocksai/calendar-vim'
 
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'numToStr/Comment.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -477,6 +430,8 @@ Plug 'renerocksai/telekasten.nvim'
 " {{{
 " }}}
 Plug 'aaronbartholomew/inka.nvim'
+
+Plug 'stevearc/oil.nvim'
 
 call plug#end()
 
