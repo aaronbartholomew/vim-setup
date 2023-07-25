@@ -423,6 +423,10 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'RRethy/nvim-treesitter-textsubjects'
+" Plug 'ThePrimeagen/refactoring.nvim',
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-media-files.nvim'
 " Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
@@ -432,6 +436,8 @@ Plug 'renerocksai/telekasten.nvim'
 Plug 'aaronbartholomew/inka.nvim'
 
 Plug 'stevearc/oil.nvim'
+Plug 'jiangmiao/auto-pairs'
+" Plug 'folke/flash.nvim'
 
 call plug#end()
 

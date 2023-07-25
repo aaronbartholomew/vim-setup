@@ -235,3 +235,64 @@ oil.setup({
 })
 vim.keymap.set("n", "<leader>e", oil.open, { desc = "Open parent directory" })
 vim.keymap.set("n", "<leader>E", oil.toggle_float, { desc = "Open parent directory" })
+
+require'nvim-treesitter.configs'.setup {
+  textobjects = {
+    select = {
+      enable = true,
+    },
+    -- Automatically jump forward to textobj, similar to targets.vim
+    lookahead = true,
+
+    keymaps = {
+      -- You can use the capture groups defined in textobjects.scm
+      ["af"] = "@function.outer",
+      ["if"] = "@function.inner",
+      ["ac"] = "@class.outer",
+      -- You can optionally set descriptions to the mappings (used in the desc parameter of
+      -- nvim_buf_set_keymap) which plugins like which-key display
+      ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+      -- You can also use captures from other query groups like `locals.scm`
+      ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+    },
+    include_surrounding_whitespace = true,
+  },
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = '<CR>',
+      scope_incremental = '<CR>',
+      node_incremental = '<TAB>',
+      node_decremental = '<S-TAB>',
+    },
+  },
+}
+require('nvim-treesitter.configs').setup {
+    textsubjects = {
+        enable = true,
+        prev_selection = ',', -- (Optional) keymap to select the previous selection
+        keymaps = {
+            ['.'] = 'textsubjects-smart',
+            [';'] = 'textsubjects-container-outer',
+            ['i;'] = 'textsubjects-container-inner',
+        },
+    },
+}
+
+-- local flash = require('flash')
+-- vim.keymap.set("n", "<leader>S", flash.treesitter, { desc = "Open parent directory" })
+-- require("telescope").load_extension("refactoring")
+
+-- vim.keymap.set(
+-- 	{"n", "x"},
+-- 	"<leader>rr",
+-- 	function() require('telescope').extensions.refactoring.refactors() end
+-- )
